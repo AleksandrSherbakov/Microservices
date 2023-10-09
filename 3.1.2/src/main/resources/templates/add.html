@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add new User</title>
+    <style>
+        body {
+            background-color: #333;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        form {
+            margin: 50px auto;
+            width: 80%;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 5px;
+            margin-top: 5px;
+        }
+
+        input[type="submit"] {
+            margin-top: 10px;
+            background-color: #555;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        a {
+            color: #fff;
+            text-decoration: none;
+            margin-top: 10px;
+            display: inline-block;
+        }
+
+        a:hover {
+            color: #ccc;
+        }
+    </style>
+</head>
+<body>
+<h1>Add User</h1>
+<form th:action="@{/admin}" th:method="PUT" th:object="${user}">
+    <label for="name">Name:</label>
+    <input type="text" th:field="*{firstName}" id="name"/>
+    <br/>
+    <label for="lastName">Lastname:</label>
+    <input type="text" th:field="*{lastName}" id="lastName"/>
+    <br/>
+    <label for="email">Username:</label>
+    <input type="text" th:field="*{username}" id="email"/>
+    <br/>
+    <label for="password">Password:</label>
+    <input type="text" th:field="*{password}" th:value="*{getPassword()}" id="password"/>
+    <br/>
+    <label>Enter role:
+        <select size="2" multiple name="roles">
+            <option selected="selected" value="1">USER</option>
+            <option value="2">ADMIN</option>
+        </select>
+    </label>
+
+    <input type="submit" value="Add">
+</form>
+<a href="/admin">Back</a>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>update</title>
+    <style>
+        body {
+            background-color: #333;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        form {
+            margin: 50px auto;
+            width: 80%;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 5px;
+            margin-top: 5px;
+        }
+
+        input[type="submit"] {
+            margin-top: 10px;
+            background-color: #555;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        a {
+            color: #fff;
+            text-decoration: none;
+            margin-top: 10px;
+            display: inline-block;
+        }
+
+        a:hover {
+            color: #ccc;
+        }
+    </style>
+</head>
+<body>
+<h1>Edit user</h1>
+<form th:action="@{/admin}" th:method="patch" th:object="${user}">
+    <input type="hidden" th:field="*{id}" th:value="*{getId()}">
+    <br>
+    <label for="firstName">Name:</label>
+    <input type="text" th:field="*{firstName}" th:value="*{getFirstName()}" id="firstName"/>
+    <br/>
+    <label for="lastName">Lastname:</label>
+    <input type="text" th:field="*{lastName}" th:value="*{getLastName()}" id="lastName"/>
+    <br/>
+    <label for="username">UserName:</label>
+    <input type="text" th:field="*{username}" th:value="*{getUsername()}" id="username"/>
+    <br/>
+    <label for="password">Password:</label>
+    <input type="text" th:field="${user.password}" th:value="*{getPassword()}" id="password"/>
+    <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+    <br/>
+    <label>Edit role:
+        <select size="2" multiple name="roles">
+            <option selected="selected" value="1">USER</option>
+            <option value="2">ADMIN</option>
+        </select>
+    </label>
+    <br>
+    <input type="submit" value="Edit">
+</form>
+
+</tr>
+
+<a href="/admin">Back</a>
+</body>
+</html>
